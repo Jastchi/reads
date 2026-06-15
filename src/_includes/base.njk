@@ -7,12 +7,41 @@
   <link rel="stylesheet" href="{{ '/styles.css' | url }}">
 </head>
 <body>
-  <header class="site-header">
-    <h1 class="site-name">Reads</h1>
-    <p class="site-tagline">Notes on things I find interesting</p>
-  </header>
-  <main>
-    {{ content | safe }}
-  </main>
+  <div class="layout">
+    <div class="main-col">
+      <header class="site-header">
+        <h1 class="site-name">Reads</h1>
+        <p class="site-tagline">Notes on things I find interesting</p>
+      </header>
+      <main>
+        {{ content | safe }}
+      </main>
+    </div>
+    <aside class="sidebar">
+      <nav class="post-index">
+        <ul id="index-list">
+          {% for post in collections.post | reverse %}
+          <li{% if loop.index > 10 %} class="index-overflow"{% endif %}>
+            <a href="#{{ post.fileSlug }}">{{ post.data.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if collections.post | length > 10 %}
+        <button class="index-expand" id="index-expand-btn">Show all</button>
+        {% endif %}
+      </nav>
+    </aside>
+  </div>
+  <script>
+    var btn = document.getElementById('index-expand-btn');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.index-overflow').forEach(function (el) {
+          el.style.display = 'block';
+        });
+        btn.remove();
+      });
+    }
+  </script>
 </body>
 </html>
