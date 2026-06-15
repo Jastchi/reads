@@ -1,6 +1,6 @@
 ---
 title: "Europe vs. U.S.A.: Europe's Economic Decline"
-date: 2026-06-15
+date: 2026-06-02
 topics: [economics, politics]
 ---
 
