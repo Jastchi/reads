@@ -1,4 +1,14 @@
+const markdownIt = require("markdown-it");
+const texmath = require("markdown-it-texmath");
+const katex = require("katex");
+
 module.exports = function (eleventyConfig) {
+  const md = markdownIt({ html: true }).use(texmath, {
+    engine: katex,
+    delimiters: "dollars",
+  });
+  eleventyConfig.setLibrary("md", md);
+
   eleventyConfig.addPassthroughCopy("src/styles.css");
   eleventyConfig.addPassthroughCopy("src/images");
 
