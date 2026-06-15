@@ -107,6 +107,73 @@ main {
   border-bottom: 1px solid #c0b8aa;
 }
 
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.post-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.tag {
+  background: none;
+  border: 1px solid #c0b8aa;
+  border-radius: 2px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.7rem;
+  color: #8a8070;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  transition: color 0.1s, border-color 0.1s, background 0.1s;
+}
+
+.tag:hover,
+.tag--active {
+  color: #1e1b17;
+  border-color: #7a7060;
+  background: #ede9e0;
+}
+
+.sidebar-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-tag {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.78rem;
+  color: #b0a898;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: color 0.1s;
+}
+
+.sidebar-tag:hover,
+.sidebar-tag--active {
+  color: #1e1b17;
+}
+
+.sidebar-tag--active {
+  font-weight: 500;
+}
+
 .post-title {
   font-family: Georgia, "Palatino Linotype", Palatino, serif;
   font-size: 1.25rem;

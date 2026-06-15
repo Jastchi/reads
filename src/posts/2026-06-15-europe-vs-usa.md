@@ -1,6 +1,7 @@
 ---
 title: "Europe vs. U.S.A.: Europe's Economic Decline"
 date: 2026-06-15
+topics: [economics, politics]
 ---
 
 Sources: [Krugman – Challenging the Narrative](https://paulkrugman.substack.com/p/challenging-the-narrative-of-european) · [Project Syndicate – Krugman is Wrong](https://www.project-syndicate.org/onpoint/paul-krugman-is-wrong-about-us-europe-productivity-gap-by-philippe-aghion-et-al-2026-05) · [Krugman – A Response](https://paulkrugman.substack.com/p/europe-versus-america-a-response)

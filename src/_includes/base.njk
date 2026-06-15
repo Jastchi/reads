@@ -18,10 +18,28 @@
       </main>
     </div>
     <aside class="sidebar">
+      <div class="sidebar-tags">
+        {% set allTopics = [] %}
+        {% for post in collections.post %}
+          {% if post.data.topics %}
+            {% for topic in post.data.topics %}
+              {% if topic not in allTopics %}
+                {% set allTopics = (allTopics.push(topic), allTopics) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        {% set tagOrder = ["economics", "politics", "history", "sociology", "biology", "philosophy", "book"] %}
+        {% for tag in tagOrder %}
+          {% if tag in allTopics %}
+          <button class="sidebar-tag" data-tag="{{ tag }}">{{ tag }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
       <nav class="post-index">
         <ul id="index-list">
           {% for post in collections.post | reverse %}
-          <li{% if loop.index > 10 %} class="index-overflow"{% endif %}>
+          <li{% if loop.index > 10 %} class="index-overflow"{% endif %} data-topics="{{ post.data.topics | join(' ') if post.data.topics else '' }}">
             <a href="#{{ post.fileSlug }}">{{ post.data.title }}</a>
           </li>
           {% endfor %}
@@ -42,6 +60,43 @@
         btn.remove();
       });
     }
+
+    var activeTag = null;
+
+    function filterByTag(tag) {
+      var posts = document.querySelectorAll('article.post');
+      var indexItems = document.querySelectorAll('#index-list li');
+      posts.forEach(function (post) {
+        var topics = post.dataset.topics ? post.dataset.topics.split(' ') : [];
+        post.style.display = (!tag || topics.includes(tag)) ? '' : 'none';
+      });
+      indexItems.forEach(function (li) {
+        var topics = li.dataset.topics ? li.dataset.topics.split(' ') : [];
+        li.style.display = (!tag || topics.includes(tag)) ? '' : 'none';
+      });
+      document.querySelectorAll('.sidebar-tag').forEach(function (btn) {
+        btn.classList.toggle('sidebar-tag--active', btn.dataset.tag === tag);
+      });
+      document.querySelectorAll('.tag').forEach(function (btn) {
+        btn.classList.toggle('tag--active', btn.dataset.tag === tag);
+      });
+    }
+
+    document.querySelectorAll('.sidebar-tag').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var tag = btn.dataset.tag;
+        activeTag = (activeTag === tag) ? null : tag;
+        filterByTag(activeTag);
+      });
+    });
+
+    document.querySelectorAll('.tag').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var tag = btn.dataset.tag;
+        activeTag = (activeTag === tag) ? null : tag;
+        filterByTag(activeTag);
+      });
+    });
   </script>
 </body>
 </html>
