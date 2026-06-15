@@ -22,11 +22,16 @@ body {
 
 .site-name {
   font-family: Georgia, "Palatino Linotype", Palatino, serif;
-  font-size: 1.1rem;
+  font-size: 1.9rem;
   font-weight: normal;
+  letter-spacing: -0.01em;
+}
+
+.site-tagline {
+  font-size: 0.88rem;
+  color: #8a8070;
   font-style: italic;
-  letter-spacing: 0;
-  text-transform: none;
+  margin-top: 0.25rem;
 }
 
 main {
