@@ -1,0 +1,16 @@
+---
+layout: base.njk
+title: Reads
+---
+
+{% for post in collections.post | reverse %}
+<article class="post">
+  <header class="post-header">
+    <h2 class="post-title">{{ post.data.title }}</h2>
+    <time datetime="{{ post.date | dateIso }}">{{ post.date | readableDate }}</time>
+  </header>
+  <div class="post-content">
+    {{ post.templateContent | safe }}
+  </div>
+</article>
+{% endfor %}

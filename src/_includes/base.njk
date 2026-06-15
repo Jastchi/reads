@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "Reads" }}</title>
+  <link rel="stylesheet" href="{{ '/styles.css' | url }}">
+</head>
+<body>
+  <header class="site-header">
+    <span class="site-name">Reads</span>
+  </header>
+  <main>
+    {{ content | safe }}
+  </main>
+</body>
+</html>
