@@ -52,6 +52,13 @@
     </aside>
   </div>
   <script>
+    window.addEventListener('load', function () {
+      if (window.location.hash) {
+        var el = document.getElementById(window.location.hash.slice(1));
+        if (el) el.scrollIntoView();
+      }
+    });
+
     var btn = document.getElementById('index-expand-btn');
     if (btn) {
       btn.addEventListener('click', function () {
