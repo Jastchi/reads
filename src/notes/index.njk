@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: Notes
+eleventyExcludeFromCollections: true
+---
+
+{% for note in collections.note | reverse %}
+{% if note.data.published != false %}
+<article class="note" id="{{ note.fileSlug }}" data-topics="{{ note.data.topics | join(',') if note.data.topics else '' }}">
+  <div class="note-row">
+    <div class="note-main">
+      <div class="note-title-row">
+        <h2 class="note-title"><a href="{{ note.url }}">{{ note.data.title }}</a></h2>
+        {% if note.data.topics %}
+        <ul class="post-tags">
+          {% for topic in note.data.topics %}
+          <li><button class="tag" data-tag="{{ topic }}">{{ topic }}</button></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% if note.templateContent | trim %}
+      <div class="note-excerpt">{{ note.templateContent | safe }}</div>
+      {% endif %}
+    </div>
+    <div class="note-meta">
+      <time datetime="{{ note.date | dateIso }}">{{ note.date | readableDate }}</time>
+      {% set pdfList = [note.data.pdf] if note.data.pdf else note.data.pdfs %}
+      {% for p in pdfList %}
+      <a href="{{ p | url }}" class="pdf-link" target="_blank">{{ "PDF" if pdfList.length == 1 else p | replace("/notes/pdfs/", "") | replace(".pdf", "") }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</article>
+{% endif %}
+{% endfor %}

@@ -1,2 +1,6 @@
 node_modules/
 _site/
+credentials.json
+oauth-credentials.json
+client_secret_*.json
+oauth-token.json

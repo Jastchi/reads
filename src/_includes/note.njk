@@ -1,0 +1,19 @@
+---
+layout: base.njk
+---
+<a class="note-back" href="{{ '/notes/' | url }}">← Notes</a>
+<article class="note-page">
+  <header class="post-header">
+    <h2 class="post-title">{{ title }}</h2>
+    <div class="post-meta">
+      <time datetime="{{ date | dateIso }}">{{ date | readableDate }}</time>
+    </div>
+  </header>
+  <div class="post-content">
+    {% set pdfList = [pdf] if pdf else pdfs %}
+    {% for p in pdfList %}
+    <a href="{{ p | url }}" class="pdf-link" target="_blank">{{ "Open PDF" if pdfList.length == 1 else p | replace("/notes/pdfs/", "") | replace(".pdf", "") }}</a>
+    {% endfor %}
+    {{ content | safe }}
+  </div>
+</article>

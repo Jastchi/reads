@@ -14,12 +14,43 @@
       <header class="site-header">
         <h1 class="site-name">Reads</h1>
         <p class="site-tagline">Notes on things I find interesting</p>
+        <nav class="site-nav">
+          <a href="{{ '/' | url }}" class="site-nav-link{% if '/notes/' not in page.url %} site-nav-link--active{% endif %}">Reads</a>
+          <a href="{{ '/notes/' | url }}" class="site-nav-link{% if '/notes/' in page.url %} site-nav-link--active{% endif %}">Notes</a>
+        </nav>
       </header>
       <main>
         {{ content | safe }}
       </main>
     </div>
     <aside class="sidebar">
+      {% if '/notes/' in page.url %}
+      <div class="sidebar-tags">
+        <button class="sidebar-tag" data-tag="maths">maths</button>
+        <button class="sidebar-tag" data-tag="physics">physics</button>
+        <button class="sidebar-tag" data-tag="economics">economics</button>
+        <button class="sidebar-tag" data-tag="finance">finance</button>
+        <button class="sidebar-tag" data-tag="data science">data science</button>
+      </div>
+      <nav class="post-index">
+        <ul id="index-list">
+          {% set publishedNotes = [] %}
+          {% for note in collections.note | reverse %}
+            {% if note.data.published != false %}
+              {% set publishedNotes = (publishedNotes.push(note), publishedNotes) %}
+            {% endif %}
+          {% endfor %}
+          {% for note in publishedNotes %}
+          <li{% if loop.index > 10 %} class="index-overflow"{% endif %} data-topics="{{ note.data.topics | join(',') if note.data.topics else '' }}">
+            <a href="#{{ note.fileSlug }}">{{ note.data.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if publishedNotes | length > 10 %}
+        <button class="index-expand" id="index-expand-btn">Show all</button>
+        {% endif %}
+      </nav>
+      {% else %}
       <div class="sidebar-tags">
         {% set allTopics = [] %}
         {% for post in collections.post %}
@@ -41,7 +72,7 @@
       <nav class="post-index">
         <ul id="index-list">
           {% for post in collections.post | reverse %}
-          <li{% if loop.index > 10 %} class="index-overflow"{% endif %} data-topics="{{ post.data.topics | join(' ') if post.data.topics else '' }}">
+          <li{% if loop.index > 10 %} class="index-overflow"{% endif %} data-topics="{{ post.data.topics | join(',') if post.data.topics else '' }}">
             <a href="#{{ post.fileSlug }}">{{ post.data.title }}</a>
           </li>
           {% endfor %}
@@ -50,6 +81,7 @@
         <button class="index-expand" id="index-expand-btn">Show all</button>
         {% endif %}
       </nav>
+      {% endif %}
     </aside>
   </div>
   <script>
@@ -73,10 +105,10 @@
     var activeTag = null;
 
     function filterByTag(tag) {
-      var posts = document.querySelectorAll('article.post');
+      var posts = document.querySelectorAll('article.post, article.note');
       var indexItems = document.querySelectorAll('#index-list li');
       posts.forEach(function (post) {
-        var topics = post.dataset.topics ? post.dataset.topics.split(' ') : [];
+        var topics = post.dataset.topics ? post.dataset.topics.split(',') : [];
         post.style.display = (!tag || topics.includes(tag)) ? '' : 'none';
       });
       indexItems.forEach(function (li) {

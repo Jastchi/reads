@@ -256,6 +256,142 @@ time {
   border-radius: 4px;
 }
 
+.site-nav {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-nav-link {
+  font-size: 0.82rem;
+  color: #b0a898;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.1s;
+}
+
+.site-nav-link:hover,
+.site-nav-link--active {
+  color: #1e1b17;
+}
+
+.note {
+  padding: 1.5rem 0;
+  border-bottom: 1px dashed #c0b8aa;
+}
+
+.note:last-child {
+  border-bottom: none;
+}
+
+.note-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.note-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.note-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.note-title {
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  font-size: 1.1rem;
+  font-weight: normal;
+  line-height: 1.35;
+}
+
+.note-title a {
+  color: #1e1b17;
+  text-decoration: none;
+}
+
+.note-title a:hover {
+  opacity: 0.6;
+}
+
+.note-excerpt {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #5a5448;
+  line-height: 1.6;
+}
+
+.note-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.note-page {
+  padding: 2.5rem 0;
+}
+
+.note-back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+  color: #8a8070;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.note-back:hover {
+  color: #1e1b17;
+}
+
+.pdf-link {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: #8a8070;
+  text-decoration: none;
+  border: 1px solid #c0b8aa;
+  border-radius: 2px;
+  padding: 0.1rem 0.5rem;
+  letter-spacing: 0.03em;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.pdf-link:hover {
+  color: #1e1b17;
+  border-color: #7a7060;
+}
+
+.note-page .pdf-link {
+  font-size: 0.88rem;
+  padding: 0.35rem 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.note-page .post-content > p:first-of-type {
+  font-size: 0.92rem;
+  color: #2a261f;
+  background: #ede9e0;
+  border-left: 3px solid #7a7060;
+  padding: 0.65rem 0.9rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+  border-radius: 0 2px 2px 0;
+}
+
+.note-page .post-content > p:first-of-type a {
+  color: #2a261f;
+  font-weight: 500;
+}
+
 @media (max-width: 640px) {
   body {
     font-size: 16px;
