@@ -63,7 +63,14 @@ jobs:
           if [ -z "$EXISTING" ]; then
             gh pr create \
               --title "Sync notes from Google Drive" \
-              --body "Automated weekly sync: new note stubs and updated PDFs from Google Drive." \
+              --body "$(cat <<'BODY'
+Automated weekly sync: new note stubs and updated PDFs from Google Drive.
+
+When publishing a stub (flipping `published: false` to `true`):
+- [ ] Add `topics` to the frontmatter
+- [ ] Run `npm run download` to pull the PDF (the sync workflow only downloads PDFs for notes already marked `published: true` at sync time)
+BODY
+)" \
               --base main \
               --head "$BRANCH"
           else
