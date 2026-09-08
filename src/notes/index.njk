@@ -9,8 +9,12 @@ eleventyExcludeFromCollections: true
 <article class="note" id="{{ note.fileSlug }}" data-topics="{{ note.data.topics | join(',') if note.data.topics else '' }}">
   <div class="note-row">
     <div class="note-main">
+      {% set pdfList = [note.data.pdf] if note.data.pdf else note.data.pdfs %}
       <div class="note-title-row">
-        <h2 class="note-title"><a href="{{ note.url | url }}">{{ note.data.title }}</a></h2>
+        {# A note page only repeats what is already on this row, so send the
+           title straight to the PDF. Multi-part notes have no single target,
+           so those stay plain and are reached by the named links opposite. #}
+        <h2 class="note-title">{% if pdfList.length == 1 %}<a href="{{ pdfList[0] | url }}" target="_blank">{{ note.data.title }}<svg class="pdf-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 1.5h6M10.5 1.5v6M10.5 1.5L5 7M8.5 7.5v3h-7v-7h3"/></svg><span class="visually-hidden">(opens PDF in a new tab)</span></a>{% else %}{{ note.data.title }}{% endif %}</h2>
         {% if note.data.topics %}
         <ul class="post-tags">
           {% for topic in note.data.topics %}
@@ -25,7 +29,6 @@ eleventyExcludeFromCollections: true
     </div>
     <div class="note-meta">
       <time datetime="{{ note.date | dateIso }}">{{ note.date | readableDate }}</time>
-      {% set pdfList = [note.data.pdf] if note.data.pdf else note.data.pdfs %}
       {% for p in pdfList %}
       <a href="{{ p | url }}" class="pdf-link" target="_blank">{{ "PDF" if pdfList.length == 1 else p | replace("/notes/pdfs/", "") | replace(".pdf", "") }}</a>
       {% endfor %}
