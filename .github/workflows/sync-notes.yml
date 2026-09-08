@@ -68,6 +68,7 @@ Automated weekly sync: new note stubs and updated PDFs from Google Drive.
 
 When publishing a stub (flipping `published: false` to `true`):
 - [ ] Add `topics` to the frontmatter
+- [ ] Add a `Source:` (or `Sources:` for several) line as the first line of the body, linking the book, paper, or article the note is based on – e.g. `Source: [Milnor & Stasheff – *Characteristic Classes*](https://...)`, several separated by ` · `
 - [ ] Run `npm run download` to pull the PDF (the sync workflow only downloads PDFs for notes already marked `published: true` at sync time)
 BODY
 )" \
