@@ -22,6 +22,17 @@ jobs:
           node-version: "20"
           cache: "npm"
       - run: npm ci
+
+      # A note is published by flipping its frontmatter in a PR, which happens
+      # after the weekly sync has already downloaded PDFs. Fetch again here so
+      # the PDF is in place the moment the PR merges.
+      - name: Write Google credentials
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
+      - run: npm run download
+      - name: Remove credentials
+        if: always()
+        run: rm -f credentials.json
+
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
