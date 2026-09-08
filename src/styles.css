@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+:root {
+  --col: 680px;
+  --rail: 160px;
+  --gap: 2rem;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   font-size: 17px;
@@ -13,11 +19,27 @@ body {
   padding: 0 1.25rem;
 }
 
+/* Centre column keeps its width; the rail lives in its own track, so it
+   can never sit on top of the text the way a fixed rail does. */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr min(var(--col), 100%) 1fr;
+  align-items: start;
+}
+
+.main-col {
+  grid-column: 2;
+  min-width: 0;
+}
+
 .sidebar {
-  position: fixed;
-  right: 2rem;
+  grid-column: 3;
+  position: sticky;
   top: 3rem;
-  width: 160px;
+  width: var(--rail);
+  margin-left: var(--gap);
+  max-height: calc(100vh - 4.5rem);
+  overflow-y: auto;
 }
 
 .post-index ul {
@@ -392,14 +414,18 @@ time {
   font-weight: 500;
 }
 
+/* Below --col + 2*(--rail + --gap) = 1064px the side tracks can no longer
+   hold the rail, so drop it rather than squeeze the column. */
+@media (max-width: 1064px) {
+  .sidebar {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   body {
     font-size: 16px;
     padding: 0 1rem;
-  }
-
-  .sidebar {
-    display: none;
   }
 
   .site-header {
