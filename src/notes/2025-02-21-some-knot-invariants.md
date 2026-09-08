@@ -3,7 +3,7 @@ title: "Some knot invariants"
 date: 2025-02-21
 pdf: /notes/pdfs/some-knot-invariants.pdf
 driveId: 1IcdilRwXScxH78bm8CEffcAiDqi255Md
-published: true
+published: false
 topics: [maths]
 ---
 
