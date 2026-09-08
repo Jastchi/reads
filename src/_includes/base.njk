@@ -15,8 +15,8 @@
         <h1 class="site-name">Reads</h1>
         <p class="site-tagline">Notes on things I find interesting</p>
         <nav class="site-nav">
-          <a href="{{ '/' | url }}" class="site-nav-link{% if '/notes/' not in page.url %} site-nav-link--active{% endif %}">Reads</a>
-          <a href="{{ '/notes/' | url }}" class="site-nav-link{% if '/notes/' in page.url %} site-nav-link--active{% endif %}">Notes</a>
+          <a href="{{ '/' | url }}" class="site-nav-link{% if '/notes/' not in (page.url or '') %} site-nav-link--active{% endif %}">Reads</a>
+          <a href="{{ '/notes/' | url }}" class="site-nav-link{% if '/notes/' in (page.url or '') %} site-nav-link--active{% endif %}">Notes</a>
         </nav>
       </header>
       <main>
@@ -24,7 +24,7 @@
       </main>
     </div>
     <aside class="sidebar">
-      {% if '/notes/' in page.url %}
+      {% if '/notes/' in (page.url or '') %}
       <div class="sidebar-tags">
         <button class="sidebar-tag" data-tag="maths">maths</button>
         <button class="sidebar-tag" data-tag="physics">physics</button>
