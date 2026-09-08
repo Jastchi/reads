@@ -10,7 +10,7 @@ eleventyExcludeFromCollections: true
   <div class="note-row">
     <div class="note-main">
       <div class="note-title-row">
-        <h2 class="note-title"><a href="{{ note.url }}">{{ note.data.title }}</a></h2>
+        <h2 class="note-title"><a href="{{ note.url | url }}">{{ note.data.title }}</a></h2>
         {% if note.data.topics %}
         <ul class="post-tags">
           {% for topic in note.data.topics %}
